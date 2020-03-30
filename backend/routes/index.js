@@ -7,4 +7,10 @@ indexRouter.get('/', function (req, res) {
   });
 });
 
+indexRouter.post('/hola', function (req, res) {
+  res.send({
+    name: 'Hola buenos dias'
+  });
+});
+
 export default indexRouter;

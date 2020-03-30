@@ -10,6 +10,9 @@ import emoji from 'node-emoji';
 import responseTime from 'response-time';
 import favicon from 'serve-favicon';
 import indexRouter from './routes/index';
+import playerRouter from './routes/player';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
 const app = express();
 
@@ -20,7 +23,11 @@ app.use(helmet());
 app.use(express.json());
 
 // only parse urlencoded bodies
-app.use(express.urlencoded({ extended: false }));
+app.use(
+  express.urlencoded({
+    extended: false
+  })
+);
 
 // protect against HTTP parameter pollution attacks
 app.use(hpp());
@@ -52,8 +59,19 @@ app.use(
   })
 );
 
+dotenv.config();
+
+mongoose.connect(
+  `mongodb://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.MONGO_PORT}/${process.env.DATABASE}`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+);
+
 // routes
 app.use('/', indexRouter);
+app.use('/player', playerRouter);
 
 // setup ip address and port number
 app.set('port', process.env.PORT || 3000);
