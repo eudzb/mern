@@ -11,7 +11,7 @@ import responseTime from 'response-time';
 import favicon from 'serve-favicon';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import sanitize from 'express-mongo-sanitize';
+// import sanitize from 'express-mongo-sanitize';
 
 // ROUTERS
 import indexRouter from './routes/index';
@@ -21,7 +21,7 @@ import userRouter from './routes/user';
 
 const app = express();
 
-app.use(sanitize);
+// app.use(sanitize);
 
 // secure the server by setting various HTTP headers
 app.use(helmet());
