@@ -7,8 +7,9 @@ export const add = (req, res) => {
   let newPlayer = new Player(req.body);
   newPlayer.save((err, createdPlayer) => {
     if (err) {
-      console.log('Error has occured ');
+      res.send(err);
     }
+
     res.json(createdPlayer);
   });
 };
