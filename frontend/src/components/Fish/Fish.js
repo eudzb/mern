@@ -11,21 +11,23 @@ const Fish = props => {
   };
 
   const soldOut = !isAvailable ? (
-    <button className='order' disabled={!isAvailable}>
+    <button className='btn btn-danger' disabled={!isAvailable}>
       Sold Out
     </button>
   ) : (
     ''
   );
   return (
-    <li className='menu-fish'>
-      <img src={image} alt={image} />
-      <h3 className='fish-name'>
-        {name}
-        <span className='price'>{formatPrice(price)}</span>
-      </h3>
-      <p>{desc}</p>
-      {soldOut}
+    <li className='my-5 bg-fish text-dark d-flex pointer'>
+      <img src={image} alt={image} className='mr-5' />
+      <div className='p-4'>
+        <h3 className='fish-name mb-3'>
+          {name}
+          <span className='price ml-2'>{formatPrice(price)}</span>
+        </h3>
+        <p>{desc}</p>
+        {soldOut}
+      </div>
     </li>
   );
 };

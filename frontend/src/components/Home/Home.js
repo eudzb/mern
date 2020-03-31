@@ -11,8 +11,8 @@ const Home = () => {
   }, [fishes]);
 
   return (
-    <div className='menu'>
-      <h1>Fishes</h1>
+    <div className='container my-5'>
+      <h1 className='text-uppercase text-dark text-fishes font-weight-bold mb-4'>Fishes</h1>
       <ul>
         {Object.keys(fishes).map(key => (
           <Fish key={key} index={key} details={fishes[key]} />

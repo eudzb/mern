@@ -1,42 +1,37 @@
-import moment from 'moment';
 import jwt from 'jwt-simple';
-// import Person from '../models/personModel';
+import moment from 'moment';
+import Person from '../models/personModel';
 
-export const ensureIsAuthenticated = (req, res, next) => {
+const ensureIsAuthentificated = (req, res, next) => {
   // 1 - Check if authentification header is given
-  if (!req.headers.authorization) {
-    return res.status(401).send('Token is missing');
+  if (!req.headers.autoriation) {
+    return res.status(401).send('token is missing');
   }
 
-  // 2 - Check is auth bearer exist
-  ('Bearer ozkodkzokfozek');
-  const token = req.headers.authorization.split('')[1];
+  // 2 - Check if auth bearer
+  const token = req.headers.autoriation.split(' ')[1];
 
   // 2-1 Check if auth bearer is correct
-  let paypload = null;
+  var payload = null;
   try {
-    paypload = jwt.decode(token, process.env.TOKEN_SECRET);
+    payload = jwt.decode(token, process.env.TOKEN_SECRET);
   } catch (error) {
-    return res.status(401).send('Invalid token…');
+    return res.status(401).send('Invalid Token');
   }
 
-  // 2-2 Check if auth bearer is not expired
   if (payload.exp <= moment().unix()) {
-    if (err) {
-      return res.status(401).send('This user ');
-    }
+    return res.status(401).send('Token expired');
   }
-
-  payload = {
-    exp: moment()
-  };
 
   const personId = payload.iss;
-  personId.findById(personId, (err, person) => {
-    if (err) {
-      return res.status(401).send('Person not found');
-    }
-  });
 
-  req.userId = pay;
+  Person.findById(personId, (err, person) => {
+    if (err) {
+      return res.status(401).send('PersonNotFound');
+    }
+    req.userId = personId;
+    next();
+  });
 };
+
+export default ensureIsAuthentificated;

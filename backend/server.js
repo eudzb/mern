@@ -11,17 +11,16 @@ import responseTime from 'response-time';
 import favicon from 'serve-favicon';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-// import sanitize from 'express-mongo-sanitize';
+import mongoSanitize from 'express-mongo-sanitize';
 
 // ROUTERS
 import indexRouter from './routes/index';
 import playerRouter from './routes/player';
 import messageRouter from './routes/message';
 import userRouter from './routes/user';
+import personRouter from './routes/person';
 
 const app = express();
-
-// app.use(sanitize);
 
 // secure the server by setting various HTTP headers
 app.use(helmet());
@@ -68,12 +67,15 @@ app.use(
 
 dotenv.config();
 
+app.use(mongoSanitize());
+
 mongoose
   .connect(
     `mongodb://${process.env.DBUSER}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.MONGO_PORT}/${process.env.DATABASE}`,
     {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      useCreateIndex: true
     }
   )
   .then(() => {
@@ -85,6 +87,7 @@ app.use('/', indexRouter);
 app.use('/player', playerRouter);
 app.use('/message', messageRouter);
 app.use('/user', userRouter);
+app.use('/person', personRouter);
 
 // setup ip address and port number
 app.set('port', process.env.PORT || 3000);
