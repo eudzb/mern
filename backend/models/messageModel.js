@@ -1,11 +1,14 @@
 import { Schema } from 'mongoose';
 
-messages: {
-  const MessageSchema = new Schema({
+const messageSchema = new Schema({
+  msg: {
     type: String,
     required: true
   },
-  username: { type: Schema.Type.objectId, ref: 'User' }
+  userName: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
-export default MessageSchema;
+export default messageSchema;

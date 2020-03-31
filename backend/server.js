@@ -9,10 +9,14 @@ import morgan from 'morgan';
 import emoji from 'node-emoji';
 import responseTime from 'response-time';
 import favicon from 'serve-favicon';
-import indexRouter from './routes/index';
-import playerRouter from './routes/player';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+
+// ROUTERS
+import indexRouter from './routes/index';
+import playerRouter from './routes/player';
+import messageRouter from './routes/message';
+import userRouter from './routes/user';
 
 const app = express();
 
@@ -76,6 +80,8 @@ mongoose
 // routes
 app.use('/', indexRouter);
 app.use('/player', playerRouter);
+app.use('/message', messageRouter);
+app.use('/user', userRouter);
 
 // setup ip address and port number
 app.set('port', process.env.PORT || 3000);
