@@ -13,9 +13,12 @@ export const signIn = async (req, res) => {
   }
 
   // user exist
-  const paswword = req.body.paswword;
-  bcrypt.compare(paswword, person.paswword, function (error, sucess) {
-    if (sucess) {
+  const password = req.body.password;
+  console.log(password);
+
+  bcrypt.compare(password, person.password, function (error, success) {
+    if (success) {
+      console.log(person.password);
       const payload = {
         exp: moment.add(1, 'hour').unix(),
         iat: moment.unix(),
