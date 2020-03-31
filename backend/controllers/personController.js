@@ -37,40 +37,13 @@ export const signIn = async (req, res) => {
   });
 };
 
-// export const signUp = async (req, res) => {
-//   let person = new Person(req.body);
-
-//   try {
-//     let createPerson = await person.save((err, createdPerson) => {
-//       if (err) {
-//         res.send(err);
-//       }
-//       res.json(createdPerson);
-//     });
-//     res.json(createPerson);
-//   } catch (err) {
-//     res.send('An error occured');
-//   }
-//   res.send(person);
-// };
-
 export const signUp = (req, res) => {
-  let person = new Person(req.body); // ici peut etre
-  console.log('person =>', person); // ça tourne à l'infini encore :'(
+  let person = new Person(req.body);
   person.save((err, savedPerson) => {
-    console.log(err);
     if (err) {
-      console.log('an error occured', err);
       res.send(err);
     }
-
-    console.log(savedPerson);
     res.json(savedPerson);
-    // c'est pire là haha
-    // les autres methodes marchent ?
-    // oui
-    // les méthodes avec user marche (post, get, delete, put) attend attend, viens avec moi
-    // personModel.js
   });
 };
 
