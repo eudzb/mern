@@ -14,7 +14,7 @@ const playerSchema = new Schema({
     required: true
   },
   phone: {
-    type: Number,
+    type: String,
     required: true
   },
   speed: {
@@ -23,7 +23,7 @@ const playerSchema = new Schema({
   },
   createDate: {
     type: Date,
-    required: Date.now
+    default: Date.now
   }
 });
 

@@ -61,13 +61,17 @@ app.use(
 
 dotenv.config();
 
-mongoose.connect(
-  `mongodb://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.MONGO_PORT}/${process.env.DATABASE}`,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
-);
+mongoose
+  .connect(
+    `mongodb://${process.env.DBUSER}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.MONGO_PORT}/${process.env.DATABASE}`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
+  )
+  .then(() => {
+    console.log(emoji.get('heavy_check_mark'), 'MongoDB connection success');
+  });
 
 // routes
 app.use('/', indexRouter);

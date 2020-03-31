@@ -17,9 +17,39 @@ export const add = (req, res) => {
 export const getAll = (req, res) => {
   Player.find({}, (err, players) => {
     if (err) {
-      res.send('an error occured…');
-    } else {
-      res.send(players);
+      res.send('An error occured while trying to get players');
     }
+
+    res.send(players);
+  });
+};
+
+export const getById = (req, res) => {
+  Player.find({ _id: req.params.id }, (err, player) => {
+    if (err) {
+      res.send('An error occured while trying to get player');
+    }
+
+    res.json(player);
+  });
+};
+
+export const update = (req, res) => {
+  Player.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, playerUpdated) => {
+    if (err) {
+      res.send('An error occured while trying to get player');
+    }
+
+    res.json(playerUpdated);
+  });
+};
+
+export const deletePlayer = (req, res) => {
+  Player.remove({ _id: req.params.id }, err => {
+    if (err) {
+      res.send('An error occured while trying to get player');
+    }
+
+    res.send('The player has been correctly deleted !');
   });
 };
