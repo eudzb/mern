@@ -14,14 +14,11 @@ export const signIn = async (req, res) => {
 
   // user exist
   const password = req.body.password;
-  console.log(password);
-
   bcrypt.compare(password, person.password, function (error, success) {
     if (success) {
-      console.log(person.password);
       const payload = {
-        exp: moment.add(1, 'hour').unix(),
-        iat: moment.unix(),
+        exp: moment().add(1, 'hour').unix(),
+        iat: moment().unix(),
         iss: person.id
       };
 
@@ -29,14 +26,14 @@ export const signIn = async (req, res) => {
       let token = jwt.encode(payload, process.env.TOKEN_SECRET);
 
       // return a person
-      res.json({
+      return res.json({
         firstName: person.firstName,
         lastName: person.lastName,
         token: `Bearer ${token}`,
         expiration: moment().add(1, 'hour').format('YYY-MM-DD HH:mm')
       });
     }
-    res.send('this email and password combination is incorrect');
+    return res.send('this email and password combination is incorrect');
   });
 };
 
