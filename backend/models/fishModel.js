@@ -6,7 +6,7 @@ const fishSchema = new Schema({
     required: true
   },
   price: {
-    type: String,
+    type: Number,
     required: true
   },
   status: {
@@ -14,7 +14,7 @@ const fishSchema = new Schema({
     enum: ['available', 'unavailable'],
     required: true
   },
-  description: {
+  desc: {
     type: String,
     required: true
   },
