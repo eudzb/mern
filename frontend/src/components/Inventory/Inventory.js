@@ -14,7 +14,7 @@ const Inventory = props => {
   };
 
   if (localStorage.getItem('token') == null) {
-    return <Redirect to='/' />;
+    return <Redirect to='/login' />;
   }
   return (
     <div className='inventory'>
