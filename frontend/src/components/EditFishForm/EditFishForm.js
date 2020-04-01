@@ -21,10 +21,7 @@ const EditFishForm = props => {
   };
 
   const deleteFish = id => {
-    const requestOptions = {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    };
+    const requestOptions = { method: 'DELETE' };
 
     fetch('http://localhost:3000/fish/' + id, requestOptions);
   };
