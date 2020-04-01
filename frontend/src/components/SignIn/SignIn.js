@@ -9,6 +9,7 @@ import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import * as yup from 'yup';
 import './SignIn.scss';
+import { Redirect } from 'react-router-dom';
 
 const validationRules = yup.object().shape({
   email: yup.string().required('Email is required').email('Invalid email address'),
@@ -32,14 +33,14 @@ const SignIn = () => {
         initialValues={{ email: '', password: '' }}
         validationSchema={validationRules}
         onSubmit={(values, { setSubmitting }) => {
-          const details = {
+          const formValues = {
             email: values.email,
             password: values.password
           };
 
           const data = new URLSearchParams();
-          data.append('email', details.email);
-          data.append('password', details.password);
+          data.append('email', formValues.email);
+          data.append('password', formValues.password);
 
           const requestOptions = {
             method: 'POST',
@@ -50,8 +51,10 @@ const SignIn = () => {
           fetch('http://localhost:3000/person/signIn', requestOptions)
             .then(response => response.json())
             .then(responseData => {
-              localStorage.setItem('token', responseData.token);
-              return responseData;
+              if (responseData) {
+                localStorage.setItem('token', responseData.token);
+                return <Redirect to='/Inventory' />;
+              }
             })
             .catch(error => console.warn(error));
 
