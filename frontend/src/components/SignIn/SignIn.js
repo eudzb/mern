@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import SendIcon from '@material-ui/icons/Send';
 import { Formik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import * as yup from 'yup';
 import './SignIn.scss';
@@ -25,6 +25,10 @@ const useStyles = makeStyles(theme => ({
 
 const SignIn = () => {
   const classes = useStyles();
+  const [isConnected, setIsConnected] = useState(false);
+  if (isConnected) {
+    return <Redirect to='/Inventory' />;
+  }
 
   return (
     <div className='my-5'>
@@ -53,7 +57,7 @@ const SignIn = () => {
             .then(responseData => {
               if (responseData) {
                 localStorage.setItem('token', responseData.token);
-                return <Redirect to='/Inventory' />;
+                setIsConnected(true);
               }
             })
             .catch(error => console.warn(error));
