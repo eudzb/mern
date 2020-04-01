@@ -32,9 +32,10 @@ const useStyles = makeStyles(theme => ({
 
 const SignUp = () => {
   const classes = useStyles();
+  const persons = fetch('http://localhost:3000/person').then(res => res);
 
   return (
-    <div>
+    <div className='my-5'>
       <Formik
         validateOnMount={true}
         initialValues={{
@@ -62,8 +63,8 @@ const SignUp = () => {
         }}>
         {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
           <Container component='main' maxWidth='sm'>
-            <h1>Signup</h1>
-            <div style={{ marginTop: 10 }}>
+            <h1 className='my-5'>Inscription {console.log(persons)}</h1>
+            <div>
               <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
@@ -72,7 +73,7 @@ const SignUp = () => {
                       fullWidth
                       id='firstName'
                       name='firstName'
-                      label='First Name'
+                      label='Prénom'
                       value={values.firstName}
                       onChange={handleChange}
                       onBlur={handleBlur}></TextField>
@@ -83,7 +84,7 @@ const SignUp = () => {
                       fullWidth
                       id='lastName'
                       name='lastName'
-                      label='Last Name'
+                      label='Nom'
                       value={values.lastName}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -96,7 +97,7 @@ const SignUp = () => {
                       fullWidth
                       id='email'
                       name='email'
-                      label='Email Address'
+                      label='Adresse email'
                       value={values.email}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -110,7 +111,7 @@ const SignUp = () => {
                       fullWidth
                       id='password'
                       name='password'
-                      label='Password'
+                      label='Mot de passe'
                       type='password'
                       value={values.password}
                       onChange={handleChange}
@@ -125,7 +126,7 @@ const SignUp = () => {
                       fullWidth
                       id='passwordConfirmation'
                       name='passwordConfirmation'
-                      label='Password confirmation'
+                      label='Confirmez votre mot de passe'
                       type='password'
                       value={values.passwordConfirmation}
                       onChange={handleChange}
@@ -146,7 +147,7 @@ const SignUp = () => {
                           onChange={handleChange('acceptTerms')}
                         />
                       }
-                      label='I have read terms and conditions'
+                      label="J'ai lu et j'accepte les conditions d'utilisations"
                     />
                     {touched.acceptTerms && errors.acceptTerms ? (
                       <div className='error'>{errors.acceptTerms}</div>
@@ -161,7 +162,7 @@ const SignUp = () => {
                   variant='contained'
                   color='primary'
                   startIcon={<SendIcon />}>
-                  Register
+                  Valider
                 </Button>
               </form>
             </div>

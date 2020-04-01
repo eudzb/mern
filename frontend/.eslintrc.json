@@ -22,7 +22,7 @@
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "no-alert": ["error"],
-    "no-console": ["error"],
+    "no-console": "off",
     "no-debugger": ["error"],
     "no-trailing-spaces": ["error"]
   }
