@@ -4,6 +4,7 @@ import sampleFishes from '../../sample-fishes';
 import AddFishForm from '../AddFishForm/AddFishForm';
 import EditFishForm from '../EditFishForm/EditFishForm';
 import './Inventory.scss';
+import { Redirect } from 'react-router-dom';
 
 const Inventory = props => {
   const [fishes, setFishes] = useState({});
@@ -12,6 +13,9 @@ const Inventory = props => {
     setFishes(sampleFishes);
   };
 
+  if (localStorage.getItem('token') == null) {
+    return <Redirect to='/' />;
+  }
   return (
     <div className='inventory'>
       <h1>Inventory</h1>
