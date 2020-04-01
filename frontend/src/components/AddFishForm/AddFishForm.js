@@ -19,20 +19,41 @@ const AddFishForm = props => {
 
   function createFish(event) {
     event.preventDefault();
-    props.addFish(fish);
-    setFish({
-      name: '',
-      price: 0,
-      status: 'available',
-      desc: '',
-      image: ''
-    });
+    fish.image = '/images/fish.jpg'; // no time to do base 64 convert
+
+    const data = new URLSearchParams();
+    data.append('name', fish.name);
+    data.append('price', fish.price);
+    data.append('status', fish.status);
+    data.append('desc', fish.desc);
+    data.append('image', fish.image);
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: data
+    };
+
+    fetch('http://localhost:3000/fish', requestOptions)
+      .then(response => response.json())
+      .then(responseData => {
+        if (responseData) {
+          setFish({
+            name: '',
+            price: 0,
+            status: 'available',
+            desc: '',
+            image: ''
+          });
+        }
+      })
+      .catch(error => console.warn(error));
   }
 
   return (
     <form className='fish-add' onSubmit={createFish}>
       <input name='name' value={fish.name} onChange={onChange('name')} type='text' placeholder='Name' />
-      <input name='price' value={fish.price} onChange={onChange('price')} type='text' placeholder='Price' />
+      <input name='price' value={fish.price} onChange={onChange('price')} type='number' placeholder='Price' min='0' />
       <select name='status' value={fish.status} onChange={onChange('status')}>
         <option value='available'>available</option>
         <option value='unavailable'>unavailable</option>

@@ -56,13 +56,14 @@ const SignIn = () => {
             .then(response => response.json())
             .then(responseData => {
               if (responseData) {
+                setSubmitting(true);
                 localStorage.setItem('token', responseData.token);
                 setIsConnected(true);
               }
             })
             .catch(error => console.warn(error));
 
-          setSubmitting(true);
+          setSubmitting(false);
         }}>
         {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
           <Container component='main' maxWidth='sm'>

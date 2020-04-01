@@ -21,7 +21,7 @@ const EditFishForm = props => {
   };
 
   return (
-    <div className='fish-edit'>
+    <div className='fish-edit my-4'>
       <input type='text' name='name' onChange={handleChange('name')} value={fish.name} />
       <input type='text' name='price' onChange={handleChange('price')} value={fish.price} />
       <select type='text' name='status' onChange={handleChange('status')} value={fish.status}>

@@ -19,7 +19,7 @@ const Fish = props => {
   );
   return (
     <li className='my-5 bg-fish text-dark d-flex pointer'>
-      <img src={image} alt={image} className='mr-5' />
+      <img src={image} alt={image} className='mr-5' width='240' />
       <div className='p-4'>
         <h3 className='fish-name mb-3'>
           {name}
