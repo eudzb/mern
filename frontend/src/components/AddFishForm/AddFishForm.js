@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import './AddFishForm.scss';
 
-const AddFishForm = props => {
+const AddFishForm = () => {
   const [fish, setFish] = useState({
     name: '',
     price: 0,

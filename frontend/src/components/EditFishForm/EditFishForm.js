@@ -20,6 +20,15 @@ const EditFishForm = props => {
     props.updateFish(props.index, newFish);
   };
 
+  const deleteFish = id => {
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    };
+
+    fetch('http://localhost:3000/fish/' + id, requestOptions);
+  };
+
   return (
     <div className='fish-edit my-4'>
       <input type='text' name='name' onChange={handleChange('name')} value={fish.name} />
@@ -30,7 +39,7 @@ const EditFishForm = props => {
       </select>
       <textarea name='desc' onChange={handleChange('desc')} value={fish.desc} />
       <input type='text' name='image' onChange={handleChange('image')} value={fish.image} />
-      <button onClick={() => props.deleteFish(props.index)}>Remove fish</button>
+      <button onClick={() => deleteFish(fish._id)}>Remove fish</button>
     </div>
   );
 };
