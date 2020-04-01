@@ -12,8 +12,8 @@ import './SignIn.scss';
 import { Redirect } from 'react-router-dom';
 
 const validationRules = yup.object().shape({
-  email: yup.string().required('Email is required').email('Invalid email address'),
-  password: yup.string().required('Password is required')
+  email: yup.string().required('Email requis').email('Email invalide'),
+  password: yup.string().required('Mot de passe requis')
 });
 
 const useStyles = makeStyles(theme => ({

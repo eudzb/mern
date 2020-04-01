@@ -15,7 +15,7 @@ const Home = () => {
   }, [fishes]);
 
   return (
-    <div className='container my-5'>
+    <div className='container'>
       <h1 className='text-uppercase text-dark text-fishes font-weight-bold mb-4'>Fishes</h1>
       <ul>
         {Object.keys(fishes).map(key => (

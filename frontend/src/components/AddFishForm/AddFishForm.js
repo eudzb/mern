@@ -51,7 +51,7 @@ const AddFishForm = props => {
   }
 
   return (
-    <form className='fish-add' onSubmit={createFish}>
+    <form className='fish-add my-5' onSubmit={createFish}>
       <input name='name' value={fish.name} onChange={onChange('name')} type='text' placeholder='Name' />
       <input name='price' value={fish.price} onChange={onChange('price')} type='number' placeholder='Price' min='0' />
       <select name='status' value={fish.status} onChange={onChange('status')}>
